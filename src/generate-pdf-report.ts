@@ -66,20 +66,20 @@ router.post("/", async function (req: express.Request, res: express.Response) {
 
 		// Set the correct date by combining birthdate and birthtime
 		var timezone: string;
-		// if (req.body.location == "") {
-		// 	timezone = 'utc';
-		// } else {
-		// 	console.log(req.body.location);
-		// 	const res = await geocoder.geocode(req.body.location);
-		// 	console.log(res);
-		//
-		// 	// Perform timezone lookup
-		// 	timezone = find(res.latitude, res.longitude)[0]; // e.g. 'America/Chicago'
-		// 	console.log('Time zone found: ', timezone);
-		// }
+		if (req.body.location == "") {
+			timezone = 'utc';
+		} else {
+			console.log(req.body.location);
+			const res = await geocoder.geocode(req.body.location);
+			// console.log(res[0]);
+		
+			// Perform timezone lookup
+			timezone = find(res[0].latitude, res[0].longitude)[0]; // e.g. 'America/Chicago'
+			console.log('Time zone found: ', timezone);
+		}
 
 		// Hard coded to UTC
-		timezone = 'utc';
+		// timezone = 'utc';
 
 		console.log("======");
 		console.log(req.body);
