@@ -582,7 +582,6 @@ export function createBodygraph(name:string, date:Date, location:string) {
 	}
 	console.log('Authority: ' + bodygraph.authority);
 
-	// Determine the definition
 	if (bodygraph.definedCenters.length == 0) {
 		bodygraph.definition = "No Definition";
 	} else if (bodygraph.definedCenters.length < 4) {
@@ -629,8 +628,9 @@ export function createBodygraph(name:string, date:Date, location:string) {
 		} // End iterating over channels
 
 		console.log('Switching on areas of definition length ...');
+    console.log('Areas of definition length: ', areasOfDefinition.length);
 
-		switch (areasOfDefinition.length) {
+		switch (areasOfDefinition.length - 1) {
 			case 1:
 				bodygraph.definition = "Single Definition";
 				break;
@@ -672,7 +672,7 @@ export function createBodygraph(name:string, date:Date, location:string) {
 				if (bridgingGateFound) break;
 			}
 			if (!bridgingGateFound) { // Since it's already set to "Split Definition" we only change it if there's no bridging gate
-				bodygraph.definition = "Wide Split Definition"; // No bridging gate found, so wide split
+				bodygraph.definition = "Split Definition"; // No bridging gate found, so wide split
 			}
 		} // End checking if split definition
 	} // End else (4 or more activated centers)
